@@ -8,14 +8,15 @@ import TukOnMeLogo from "@/assets/icons/tukonmefull.png";
 import StartActivity from "@/components/StartActivity";
 import ThemedButton from "@/components/ThemedButton";
 import { useTheme } from "@/context/ThemeContext";
+import { useRouter } from "expo-router";
 
 export default function MapPage() {
-  const Company = useTheme();
-  console.log(Company.fulllogo);
+  const { company } = useTheme();
+  //   console.log(Company.fulllogo);
   const [progress, setProgress] = useState(45);
   const [timer, setTimer] = useState(60);
   const [showStartActivity, setShowStartActivity] = useState(false);
-  const navigation = useNavigation();
+  const router = useRouter();
   const totalDots = 6;
 
   useEffect(() => {
@@ -70,7 +71,15 @@ export default function MapPage() {
             <Text style={styles.progressPercentage}>{progress}% complete</Text>
           </View>
           <View style={styles.progressBar}>
-            <View style={[styles.progressFill, { width: `${progress}%` }]} />
+            <View
+              style={[
+                styles.progressFill,
+                {
+                  width: `${progress}%`,
+                  backgroundColor: company.theme.primary,
+                },
+              ]}
+            />
             <View style={styles.dotsContainer}>
               {[...Array(totalDots)].map((_, index) => {
                 const dotPosition = (index / (totalDots - 1)) * 100;
@@ -81,7 +90,7 @@ export default function MapPage() {
                       styles.dot,
                       dotPosition <= progress
                         ? styles.dotFilled
-                        : styles.dotEmpty,
+                        : { backgroundColor: company.theme.primary },
                     ]}
                   />
                 );
@@ -105,8 +114,19 @@ export default function MapPage() {
         <View
           style={[styles.timerBox, timer <= 30 ? styles.timerWarning : null]}
         >
-          <Ionicons name="stopwatch-outline" style={styles.timerIcon} />
-          <Text style={styles.timerText}>
+          <Ionicons
+            name="stopwatch-outline"
+            style={[
+              styles.timerIcon,
+              timer <= 30 ? styles.timerwarningicon : null,
+            ]}
+          />
+          <Text
+            style={[
+              styles.timerText,
+              timer <= 30 ? styles.timerwarningtext : null,
+            ]}
+          >
             {timer === 0 ? (
               <Text style={styles.timerExpiredText}>Times Up</Text>
             ) : (
@@ -118,7 +138,7 @@ export default function MapPage() {
 
       <View style={styles.logoContainer}>
         <Image
-          source={Company?.fulllogo || TukOnMeLogo}
+          source={company.fulllogo || TukOnMeLogo}
           style={styles.logoImage}
         />
       </View>
@@ -126,7 +146,7 @@ export default function MapPage() {
       <View style={styles.nextButtonContainer}>
         <ThemedButton
           style={styles.nextButton}
-          onPress={() => navigation.navigate("ActivityOptions")}
+          onPress={() => router.push("/activityoptions")}
           title="Next"
         />
       </View>
@@ -162,11 +182,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  exitButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 25,
-  },
+  // exitButton: {
+  //   paddingVertical: 8,
+  //   paddingHorizontal: 16,
+  //   borderRadius: 25,
+  // },
   //   exitButtonText: {
   //     color: "white",
   //     fontSize: 16,
@@ -176,8 +196,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 16,
     borderRadius: 12,
-    width: "80%",
-    maxWidth: 400,
+    width: "60%",
+    maxWidth: 550,
   },
   progressTextContainer: {
     flexDirection: "row",
@@ -186,16 +206,17 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 12,
-    color: "gray",
+    color: "#A0A0AA",
   },
   progressPercentage: {
     fontSize: 12,
     fontWeight: "bold",
+    color: "#414264",
   },
   progressBar: {
     position: "relative",
     width: "100%",
-    height: 10,
+    height: 12,
     backgroundColor: "#f0f0f0",
     borderRadius: 5,
     marginTop: 8,
@@ -216,25 +237,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+    width: 12,
+    height: 12,
+    borderRadius: 50,
     borderWidth: 1,
-    borderColor: "#003366",
+    // borderColor: "#003366",
   },
   dotFilled: {
     backgroundColor: "white",
   },
-  dotEmpty: {
-    backgroundColor: "#003366",
-  },
+  // dotEmpty: {
+  //   backgroundColor: "#003366",
+  // },
   recenterButton: {
     flexDirection: "row",
     alignItems: "center",
 
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 25,
+    paddingVertical: 12,
+    paddingHorizontal: 36,
+    // borderRadius: 25,
   },
   recenterIcon: {
     color: "white",
@@ -263,34 +284,44 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    borderWidth: 2,
-    borderColor: "#003366",
+    // borderWidth: 2,
+    // borderColor: "#003366",
   },
   timerWarning: {
     backgroundColor: "#fce4e4",
-    borderColor: "#f44336",
+    borderColor: "#FF3E3E",
+    borderWidth: 2,
+  },
+  timerwarningicon: {
+    color: "#FF3E3E",
   },
   timerIcon: {
     fontSize: 24,
-    color: "#003366",
+    color: "#414264",
     marginRight: 12,
   },
   timerText: {
     fontSize: 18,
-    color: "#003366",
+    color: "#414264",
+  },
+  timerwarningtext: {
+    color: "#FF3E3E",
   },
   timerExpiredText: {
-    color: "#f44336",
+    color: "#FF3E3E",
     fontWeight: "bold",
   },
   logoContainer: {
     position: "absolute",
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
     bottom: 40,
     left: 20,
     zIndex: 1,
   },
   logoImage: {
-    width: 100,
+    width: 140,
     height: 60,
     resizeMode: "contain",
   },

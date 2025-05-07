@@ -18,12 +18,13 @@ const FEEDBACK_DATA = [
 ];
 
 // Example scores
-const pointsEarned = 30;
+const pointsEarned = 50;
 const totalScore = 105;
 
 // --- Curved Text Component ---
 const CurvedText = ({ text = "" }) => {
-  const company = useTheme();
+  const { company } = useTheme();
+  // console.log(company);
   const radius = 320; // radius of the arc
   const centerX = 200;
   const centerY = 150;
@@ -49,8 +50,8 @@ const CurvedText = ({ text = "" }) => {
               {
                 left: x,
                 top: y,
-                transform: [{ rotate: `${angleDeg + 90}deg` }],
-                color: company.theme?.primary || "#0A3D62",
+                transform: [{ rotate: `${angleDeg + 90}deg` }], // Rotating text to match the arc
+                color: company.theme?.primary || "#0A3D62", // Using company theme color or default
               },
             ]}
           >
@@ -82,7 +83,7 @@ export default class FeedbackScreen extends Component {
           </Text>
         </View>
         <ThemedButton
-          title="Next"
+          title="Continue"
           style={styles.nextButton}
           onPress={() => router.push("/")}
         />
@@ -108,13 +109,14 @@ const styles = StyleSheet.create({
   },
   pointsText: {
     fontSize: 32,
-    fontWeight: "600",
-    color: "#1e272e",
+    fontWeight: "700",
+    color: "#414264",
     marginTop: 8,
+    marginBottom: 8,
   },
   totalText: {
     fontSize: 24,
-    color: "#636e72",
+    color: "#A0A0AA",
     marginTop: 4,
   },
   nextButton: {

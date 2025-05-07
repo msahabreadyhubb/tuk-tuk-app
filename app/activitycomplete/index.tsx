@@ -62,7 +62,7 @@ export default function ActivityPage() {
       <ThemedButton
         title="Next"
         style={styles.nextButton}
-        onPress={() => router.push("feedback")}
+        onPress={() => router.push("/activityvideo")}
       />
 
       {/* ScoreSetter Modal */}
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     zIndex: 1, // Ensure background image is behind other content
   },
   logo: {
-    width: 100,
-    height: 50,
+    width: 140,
+    height: 60,
     position: "absolute",
     top: 40,
     right: 20,
@@ -102,20 +102,20 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "700",
-    color: "#333",
+    color: "#414264",
     marginBottom: 16,
   },
   illustration: {
     width: Dimensions.get("window").width * 0.8,
-    height: 200,
+    height: 400,
     marginBottom: 16,
   },
   subtitle: {
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 20,
+    fontSize: 18,
+    color: "#414264",
+    marginBottom: 28,
     textAlign: "center",
   },
   completeButton: {

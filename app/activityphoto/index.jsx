@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import { Camera, CameraType } from "expo-camera";
+import { Camera } from "expo-camera";
 
 import { useTheme } from "@/context/ThemeContext";
 import { useRouter } from "expo-router";
@@ -12,10 +12,10 @@ export default function TakePhoto() {
   const [submitted, setSubmitted] = useState(false);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const cameraRef = useRef(null);
-  // const navigation = useNavigation();
   const router = useRouter();
   const { company } = useTheme();
 
+  // Request camera permissions on component mount
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -57,7 +57,11 @@ export default function TakePhoto() {
     <View style={styles.container}>
       {/* Top logo */}
       <View style={styles.logoWrapper}>
-        <Image source={company.logo} style={styles.logo} resizeMode="contain" />
+        <Image
+          source={company.fulllogo}
+          style={styles.logo}
+          resizeMode="contain"
+        />
       </View>
 
       {/* Background image */}
@@ -92,7 +96,7 @@ export default function TakePhoto() {
             <View style={styles.cameraWrapper}>
               {isCameraOpen ? (
                 <Camera
-                  type={CameraType.front}
+                  type="front" // Using "front" string directly
                   ref={cameraRef}
                   style={styles.camera}
                 />
@@ -115,25 +119,17 @@ export default function TakePhoto() {
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Accusantium, maiores.
                 </Text>
-                {/* <TouchableOpacity
-                  style={styles.primaryBtn}
-                  onPress={startCamera}
-                >
-                  <Text style={styles.primaryText}>Take Photo</Text>
-                </TouchableOpacity> */}
                 <ThemedButton title="Take Photo" onPress={startCamera} />
               </View>
             )}
           </>
         )}
       </View>
-      
 
       {/* Next Activity Button */}
-
       <ThemedButton
         title="Next Activity"
-        onPress={() => router.push("activityvideo")}
+        onPress={() => router.push("activitycomplete")}
         style={styles.nextBtn}
       />
     </View>
@@ -143,7 +139,7 @@ export default function TakePhoto() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#EEF0F3",
     position: "relative",
   },
   logoWrapper: {
@@ -153,8 +149,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   logo: {
-    width: 100,
-    height: 40,
+    width: 140,
+    height: 60,
   },
   backgroundImg: {
     position: "absolute",
@@ -172,9 +168,9 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   title: {
-    fontSize: 22,
+    fontSize: 32,
     fontWeight: "600",
-    color: "#1e293b",
+    color: "#414264",
     marginBottom: 20,
     textAlign: "center",
   },
@@ -203,8 +199,9 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   description: {
-    color: "#64748b",
-    marginBottom: 12,
+    color: "#414264",
+    fontSize: 16,
+    marginBottom: 38,
     textAlign: "center",
   },
   buttonRow: {

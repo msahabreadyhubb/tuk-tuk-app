@@ -86,7 +86,7 @@ export default function QuizPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F3F4F6", // Light Gray background color
+    backgroundColor: "#EEF0F3", // Light Gray background color
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -120,8 +120,8 @@ const styles = StyleSheet.create({
     right: 20,
   },
   logo: {
-    width: 96,
-    height: 48,
+    width: 140,
+    height: 60,
     resizeMode: "contain",
   },
   card: {
@@ -129,9 +129,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   heading: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#374151", // darkGray
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#414264", // darkGray
     marginBottom: 16,
     textAlign: "center",
   },
@@ -141,21 +141,21 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   circularImage: {
-    width: 180,
-    height: 160,
+    width: 280,
+    height: 260,
     borderRadius: 90, // make image circular
     resizeMode: "contain",
   },
   subtitle: {
     textAlign: "center",
-    color: "#374151", // darkGray
+    color: "#414264", // darkGray
     marginBottom: 16,
   },
   textInput: {
     width: "100%",
-    padding: 12,
-    borderColor: "#ccc",
-    backgroundColor: "white",
+    padding: 16,
+    borderColor: "#CACACA",
+    backgroundColor: "#F9FAFB",
 
     borderRadius: 8,
     color: "#374151", // darkGray

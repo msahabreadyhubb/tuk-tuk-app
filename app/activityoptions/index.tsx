@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 40,
     right: 20,
-    width: 96,
-    height: 48,
+    width: 160,
+    height: 60,
     zIndex: 1,
   },
   content: {
@@ -156,27 +156,30 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   heading: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#374151", // darkGray
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#414264", // darkGray
     marginBottom: 16,
     textAlign: "center",
   },
   illustration: {
-    width: 180,
-    height: 160,
+    width: 280,
+    height: 260,
     marginBottom: 16,
   },
   subtitle: {
     textAlign: "center",
-    color: "#374151",
+    fontSize: 18,
+    color: "#414264",
     marginBottom: 16,
   },
   optionsContainer: {
     width: "100%",
-    gap: 12,
+    flexDirection: "row",
+    justifyContent: "space-between", // Even spacing between 3 cards
     marginBottom: 16,
   },
+
   optionCard: {
     backgroundColor: "white",
     borderRadius: 12,
@@ -187,14 +190,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    width: "32%", // roughly 3 cards with spacing (100% - 2 * gap)
   },
+
   optionInner: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   optionText: {
-    color: "#4B5563", // gray-700
+    color: "#414264", // gray-700
     flexShrink: 1,
+    fontSize: 18,
   },
   submitButton: {
     paddingVertical: 10,

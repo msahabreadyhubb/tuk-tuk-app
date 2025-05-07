@@ -21,10 +21,7 @@ export default function DrawingFlowPage() {
       <View style={styles.contentContainer}>
         {/* Logo */}
         <View style={styles.logoContainer}>
-          <Image
-            source={company.fulllogo}
-            style={styles.logo}
-          />
+          <Image source={company.fulllogo} style={styles.logo} />
         </View>
 
         {step === 1 && (
@@ -50,7 +47,7 @@ export default function DrawingFlowPage() {
                 onPress={() => router.push("/activityphoto")}
               />
             </View>
-            {/* <DrawingCanvas /> */}
+            <DrawingCanvas />
           </>
         )}
       </View>
@@ -61,7 +58,7 @@ export default function DrawingFlowPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F3F4F6", // Light gray background
+    backgroundColor: "#EEF0F3", // Light gray background
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -88,8 +85,8 @@ const styles = StyleSheet.create({
     right: 20, // Adjusted to ensure visibility
   },
   logo: {
-    width: 96,
-    height: 48,
+    width: 140,
+    height: 60,
     resizeMode: "contain",
   },
   card: {
@@ -99,22 +96,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   heading: {
-    fontSize: 20,
-    fontWeight: "600",
-    color: "#374151", // Dark gray
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#414264", // Dark gray
     marginBottom: 16,
     textAlign: "center",
   },
   drawingImage: {
-    width: 391,
-    height: 258,
+    width: 550,
+    height: 400,
     resizeMode: "contain",
     marginBottom: 16,
   },
   subText: {
-    color: "#374151", // Dark gray
+    color: "#414264", // Dark gray
     textAlign: "center",
-    marginBottom: 16,
+    marginBottom: 36,
   },
   nextButtonContainer: {
     position: "absolute",

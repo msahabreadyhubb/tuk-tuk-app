@@ -1,9 +1,11 @@
 // components/layouts/QuizLayout.tsx
 
+import { useTheme } from "@/context/ThemeContext";
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 
 const QuizLayout = ({ children }: { children: React.ReactNode }) => {
+  const { company } = useTheme();
   return (
     <View style={styles.container}>
       {/* Background Image */}
@@ -14,10 +16,7 @@ const QuizLayout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Logo in the top right corner */}
       <View style={styles.logoContainer}>
-        <Image
-          source={require("@/assets/icons/tukonmefull.png")}
-          style={styles.logo}
-        />
+        <Image source={company.fulllogo} style={styles.logo} />
       </View>
 
       {/* Screen content */}

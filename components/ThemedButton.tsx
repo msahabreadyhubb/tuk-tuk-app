@@ -22,7 +22,6 @@ const ThemedButton: React.FC<ThemedButtonProps> = ({
   style,
   disabled,
   icon,
-  
 }) => {
   const { company } = useTheme();
 
@@ -38,8 +37,8 @@ const ThemedButton: React.FC<ThemedButtonProps> = ({
       activeOpacity={0.7}
       disabled={disabled}
     >
- {/* Icon + Text horizontally */}
- <Text style={styles.text}>
+      {/* Icon + Text horizontally */}
+      <Text style={styles.text}>
         {icon && <>{icon} </>}
         {title}
       </Text>

@@ -73,7 +73,11 @@ export default function TakeVideo() {
     <View style={styles.container}>
       {/* Top logo */}
       <View style={styles.logoWrapper}>
-        <Image source={company.logo} style={styles.logo} resizeMode="contain" />
+        <Image
+          source={company.fulllogo}
+          style={styles.logo}
+          resizeMode="contain"
+        />
       </View>
 
       {/* Background image */}
@@ -160,7 +164,7 @@ export default function TakeVideo() {
       {/* Next Activity Button */}
       <ThemedButton
         title="Next Activity"
-        onPress={() => router.push("activitycomplete")}
+        onPress={() => router.push("/feedback")}
         style={styles.nextBtn}
       />
     </View>
@@ -170,7 +174,7 @@ export default function TakeVideo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#EEF0F3",
     position: "relative",
   },
   logoWrapper: {
@@ -180,8 +184,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   logo: {
-    width: 100,
-    height: 40,
+    width: 140,
+    height: 60,
   },
   backgroundImg: {
     position: "absolute",
@@ -199,9 +203,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   title: {
-    fontSize: 22,
-    fontWeight: "600",
-    color: "#1e293b",
+    fontSize: 32,
+
+    fontWeight: "700",
+    color: "#414264",
     marginBottom: 20,
     textAlign: "center",
   },
@@ -230,8 +235,8 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   description: {
-    color: "#64748b",
-    marginBottom: 12,
+    color: "#414264",
+    marginBottom: 28,
     textAlign: "center",
   },
   buttonRow: {
@@ -265,5 +270,6 @@ const styles = StyleSheet.create({
     bottom: 24,
     right: 24,
     zIndex: 10,
+    fontWeight: "600",
   },
 });

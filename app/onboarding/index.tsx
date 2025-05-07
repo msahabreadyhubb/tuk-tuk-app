@@ -50,7 +50,7 @@ export default function SlideshowScreen() {
 
   const handleNext = () => {
     if (isLastSlide) {
-      router.push("/activityoptions");
+      router.push("/mapprogress");
     } else {
       setCurrentIndex((prev) => prev + 1);
     }
@@ -108,6 +108,7 @@ export default function SlideshowScreen() {
         <ThemedButton
           title={isLastSlide ? "Start" : "Next"}
           onPress={handleNext}
+          style={styles.nextButton}
         />
 
         <View style={styles.dots}>
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: "100%",
-    height: "60%",
+    height: "70%",
     zIndex: 0,
   },
   header: {
@@ -152,21 +153,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   exitLabel: {
-    color: "#333",
+    color: "#414264",
     marginLeft: 4,
-    fontSize: 16,
+    fontSize: 18,
   },
   logoRow: {
     flexDirection: "row",
     alignItems: "center",
+    margin: 8,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
   },
   divider: {
     width: 3,
-    height: 40,
+    height: 60,
     backgroundColor: "#aaa",
     marginHorizontal: 10,
   },
@@ -179,8 +181,8 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     textAlign: "center",
-    color: "#333",
-    fontSize: 18,
+    color: "#414264",
+    fontSize: 20,
     marginBottom: 20,
   },
   dots: {
@@ -188,10 +190,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   dot: {
-    width: 10,
-    height: 10,
+    width: 20,
+    height: 20,
     backgroundColor: "#ccc",
-    borderRadius: 5,
-    marginHorizontal: 5,
+    borderRadius: 50,
+    marginHorizontal: 10,
+  },
+  nextButton: {
+    marginTop: -30,
+    paddingHorizontal: 50,
+    paddingVertical: 15,
   },
 });
