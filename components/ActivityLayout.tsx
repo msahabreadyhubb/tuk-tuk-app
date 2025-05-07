@@ -1,0 +1,56 @@
+// components/layouts/QuizLayout.tsx
+
+import React from "react";
+import { View, Image, StyleSheet } from "react-native";
+
+const QuizLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <View style={styles.container}>
+      {/* Background Image */}
+      <Image
+        source={require("@/assets/images/bgonboarding.png")}
+        style={styles.backgroundImage}
+      />
+
+      {/* Logo in the top right corner */}
+      <View style={styles.logoContainer}>
+        <Image
+          source={require("@/assets/icons/tukonmefull.png")}
+          style={styles.logo}
+        />
+      </View>
+
+      {/* Screen content */}
+      {children}
+    </View>
+  );
+};
+
+export default QuizLayout;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: "relative",
+    backgroundColor: "#EEF0F3",
+  },
+  backgroundImage: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: "60%",
+    zIndex: 1,
+  },
+  logoContainer: {
+    position: "absolute",
+    top: 40,
+    right: 20,
+    zIndex: 2,
+  },
+  logo: {
+    width: 196,
+    height: 60,
+    resizeMode: "contain",
+  },
+});
