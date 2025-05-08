@@ -53,15 +53,23 @@ export default function HomeScreen() {
           </Text>
         </Pressable>
         {/* Go to Onboarding page */}
-        <Link href="/onboarding" asChild>
+        {/* <Link href="/onboarding" asChild>
           <Pressable>
             <Text style={{ color: "white", fontWeight: "bold" }}>
               Go to Onboarding
             </Text>
           </Pressable>
-        </Link>
-
+        </Link> */}
         <ThemedButton
+          title="Go to Onboarding"
+          onPress={() => router.push("/onboarding")}
+        />
+        <ThemedButton
+          title="photo"
+          onPress={() => router.push("/activityphoto")}
+        />
+
+        {/* <ThemedButton
           title="Go to Activity Page"
           onPress={() => {
             router.push("/feedback");
@@ -70,8 +78,7 @@ export default function HomeScreen() {
         <ThemedButton
           title="Go to Mapprogress"
           onPress={() => router.push("/mapprogress")}
-        />
-        
+        /> */}
       </View>
     </View>
   );

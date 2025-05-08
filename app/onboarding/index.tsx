@@ -56,6 +56,8 @@ export default function SlideshowScreen() {
     }
   };
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/*******  e5bc1757-b4c4-4893-8cb4-e2bff162c748  *******/
   const handleBack = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
