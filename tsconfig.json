@@ -3,15 +3,17 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "components/DrawingCanvas.jsx", "app/activityphoto/index.jsx", "app/activitycomplete/index.tsx"  ]
+    "expo-env.d.ts",
+    "components/DrawingCanvas.jsx",
+    "app/activityphoto/index.tsx",
+    "app/activitycomplete/index.tsx",
+    "assets/images/index.js"
+, "app/video/index.tsx", "app/index.jsx"  ]
 }

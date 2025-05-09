@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import { Camera } from "expo-camera";
+import { Camera, useCameraPermissions } from "expo-camera";
 
 import { useTheme } from "@/context/ThemeContext";
 import { useRouter } from "expo-router";
 import ThemedButton from "@/components/ThemedButton";
+import { Button } from "@react-navigation/elements";
 
 export default function TakePhoto() {
-  const [hasPermission, setHasPermission] = useState(null);
+  const [permission, requestPermission] = useCameraPermissions();
+
+  // const [hasPermission, setHasPermission] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
@@ -15,13 +18,27 @@ export default function TakePhoto() {
   const router = useRouter();
   const { company } = useTheme();
 
+  if (!permission) {
+    return null;
+  }
+
+  if (!permission.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: "center" }}>
+          We need your permission to use the camera
+        </Text>
+        <Button onPress={requestPermission} title="Grant permission" />
+      </View>
+    );
+  }
   // Request camera permissions on component mount
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { status } = await Camera.requestCameraPermissionsAsync();
+  //     setHasPermission(status === "granted");
+  //   })();
+  // }, []);
 
   const startCamera = () => {
     setIsCameraOpen(true);
@@ -45,11 +62,11 @@ export default function TakePhoto() {
     setSubmitted(true);
   };
 
-  if (hasPermission === null) {
+  if (permission === null) {
     return <Text>Requesting permission...</Text>;
   }
 
-  if (hasPermission === false) {
+  if (permission === false) {
     return <Text>No access to camera</Text>;
   }
 
@@ -114,12 +131,19 @@ export default function TakePhoto() {
                 <Text style={styles.primaryText}>Capture</Text>
               </TouchableOpacity>
             ) : (
+              // <ThemedButton
+              //   title="Capture"
+              //   onPress={() => router.push("/camera")}
+              // />
               <View style={styles.descriptionWrapper}>
                 <Text style={styles.description}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Accusantium, maiores.
                 </Text>
-                <ThemedButton title="Take Photo" onPress={startCamera} />
+                <ThemedButton
+                  title="Take Photo"
+                  onPress={() => router.push("/camera")}
+                />
               </View>
             )}
           </>
@@ -129,7 +153,7 @@ export default function TakePhoto() {
       {/* Next Activity Button */}
       <ThemedButton
         title="Next Activity"
-        onPress={() => router.push("activitycomplete")}
+        onPress={() => router.push("activityimage")}
         style={styles.nextBtn}
       />
     </View>

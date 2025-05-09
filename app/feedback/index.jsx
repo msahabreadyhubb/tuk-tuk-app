@@ -85,7 +85,7 @@ export default class FeedbackScreen extends Component {
         <ThemedButton
           title="Continue"
           style={styles.nextButton}
-          onPress={() => router.push("/")}
+          onPress={() => router.push("/thankyou")}
         />
       </ActivityLayout>
     );
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 40,
     right: 20,
-    zIndex: 10,
+    zIndex: 20,
   },
   curvedTextContainer: {
     width: 400,

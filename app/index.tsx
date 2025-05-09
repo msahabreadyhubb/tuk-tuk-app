@@ -1,85 +1,169 @@
-// app/index.js
-import { View, Text, Image, Pressable } from "react-native";
-import { useTheme } from "@/context/ThemeContext";
-import { Link, router, useRouter } from "expo-router";
-import ThemedButton from "@/components/ThemedButton";
+import React, { useRef, useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
-export default function HomeScreen() {
-  const { company, selectCompany } = useTheme();
+import { useRouter } from "expo-router";
+
+export default function LoginScreen() {
+  const [password, setPassword] = useState(["", "", "", ""]);
+  const inputRefs = useRef<TextInput[]>([]);
+  // const navigation = useNavigation();
   const router = useRouter();
 
+  const handleChange = (index: number, value: string) => {
+    if (/^\d?$/.test(value)) {
+      const newPass = [...password];
+      newPass[index] = value;
+      setPassword(newPass);
+      if (value && index < password.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (index: number, e: any) => {
+    if (e.nativeEvent.key === "Backspace" && !password[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleSubmit = () => {
+    router.push("/onboarding");
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        width: "100%",
-        backgroundColor: company.theme.primary,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+    <LinearGradient
+      colors={["#DBEAFE", "#ffffff", "#DBEAFE"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.container}
     >
-      <Image source={company.logo} style={{ width: 100, height: 100 }} />
-      <Text style={{ color: company.theme.darkGray, fontSize: 24 }}>
-        {company.name}
-      </Text>
-
-      <View style={{ marginTop: 20 }}>
-        <Pressable
-          onPress={() => selectCompany("alpha")}
-          style={{
-            backgroundColor: company.theme.primary,
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            borderRadius: 8,
-            marginTop: 10,
-          }}
-        >
-          <Text style={{ color: "white", fontWeight: "bold" }}>
-            Switch to Alfa
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => selectCompany("beta")}
-          style={{
-            backgroundColor: company.theme.primary,
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            borderRadius: 8,
-            marginTop: 10,
-          }}
-        >
-          <Text style={{ color: "white", fontWeight: "bold" }}>
-            Switch to Beta
-          </Text>
-        </Pressable>
-        {/* Go to Onboarding page */}
-        {/* <Link href="/onboarding" asChild>
-          <Pressable>
-            <Text style={{ color: "white", fontWeight: "bold" }}>
-              Go to Onboarding
-            </Text>
-          </Pressable>
-        </Link> */}
-        <ThemedButton
-          title="Go to Onboarding"
-          onPress={() => router.push("/onboarding")}
-        />
-        <ThemedButton
-          title="photo"
-          onPress={() => router.push("/activityphoto")}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.innerContainer}
+      >
+        <Image
+          source={require("@/assets/icons/Vector.png")} // Update the path accordingly
+          style={styles.logo}
         />
 
-        {/* <ThemedButton
-          title="Go to Activity Page"
-          onPress={() => {
-            router.push("/feedback");
-          }}
-        />
-        <ThemedButton
-          title="Go to Mapprogress"
-          onPress={() => router.push("/mapprogress")}
-        /> */}
-      </View>
-    </View>
+        <View style={styles.card}>
+          <Text style={styles.title}>Welcome back</Text>
+
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            placeholder="name@email.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            style={styles.input}
+          />
+
+          <Text style={[styles.label, { marginTop: 20 }]}>Password</Text>
+          <View style={styles.passwordRow}>
+            {password.map((num, i) => (
+              <TextInput
+                key={i}
+                ref={(el) => (inputRefs.current[i] = el!)}
+                value={num}
+                maxLength={1}
+                keyboardType="number-pad"
+                onChangeText={(text) => handleChange(i, text)}
+                onKeyPress={(e) => handleKeyDown(i, e)}
+                style={styles.pinInput}
+              />
+            ))}
+          </View>
+
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </LinearGradient>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
+  logo: {
+    position: "absolute",
+    top: 40,
+    left: 20,
+    width: 48,
+    height: 48,
+    resizeMode: "contain",
+  },
+  card: {
+    backgroundColor: "white",
+    padding: 24,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    width: "100%",
+    maxWidth: 400,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#333",
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: "500",
+    marginBottom: 8,
+    color: "#333",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    padding: 12,
+    fontSize: 16,
+  },
+  passwordRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 8,
+  },
+  pinInput: {
+    width: 48,
+    height: 48,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    textAlign: "center",
+    fontSize: 20,
+  },
+  button: {
+    backgroundColor: "#1D4ED8",
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 28,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+  },
+});

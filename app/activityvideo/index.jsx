@@ -154,7 +154,10 @@ export default function TakeVideo() {
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Accusantium, maiores.
                 </Text>
-                <ThemedButton title="Take Video" onPress={startCamera} />
+                <ThemedButton
+                  title="Take Video"
+                  onPress={() => router.push("/video")}
+                />
               </View>
             )}
           </>
